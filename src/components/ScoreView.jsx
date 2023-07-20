@@ -1,10 +1,10 @@
 import React from 'react'
 
-function ScoreView() {
+function ScoreView({ mark, handleResetBtn }) {
   return (
-      <div className='w-2/3 flex flex-col justify-center items-center bg-red-400 rounded-lg p-20'>
-        <p className="text-2xl mb-8">You have scored 1 out of 5</p>
-        <button className="border-2 px-4 rounded-sm">Reset</button>
+      <div className='w-full h-full sm:w-2/3 sm:h-2/3 flex flex-col justify-center items-center bg-orange-300 rounded-lg'>
+          <p className="text-2xl my-4 px-0">You have scored {mark} out of 5</p>
+          <button onClick={handleResetBtn} className="border-2 px-4 rounded-sm">Reset</button>
     </div>
   )
 }

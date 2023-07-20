@@ -1,23 +1,26 @@
 import React from 'react'
 
-function QuizView() {
+function QuizView({ questions, currentQuestion, handleBtnClicked }) {
   return (
-      <div className='w-2/3 flex flex-col justify-center items-center bg-red-400 rounded-lg p-10'>
-        <div>
-            <div className='font-bold'>
-                <span>Question 1/5</span>
+      <div className='w-full h-full sm:w-2/3 sm:h-2/3 flex flex-col justify-center items-center bg-orange-300 rounded-lg py-10 pr-6 '>
+        <div className=''>
+              <div className='font-bold'>
+                <span>Question {currentQuestion +1}/{questions.length}</span>
             </div>
             
         </div>
 
         <div>
-              <div className="text-xl my-4">What comes after b?</div>
+              <div className="text-xl my-4 px-2">{questions[currentQuestion].question}</div>
         </div>
 
         <div className='flex flex-col items-center justify-center py-2'>
-            <button className='border-2 px-8 rounded-sm bg-white'>a</button>
-              <button className='border-2 px-8 rounded-sm bg-white my-2'>c</button>
-              <button className='border-2 px-8 rounded-sm bg-white'>b</button>
+            {
+                questions[currentQuestion].answers.map(({text, isCorrect})=>(
+                    <button onClick={() => handleBtnClicked(isCorrect)} key={text} className='border-2 py-2 px-8 rounded-md bg-slate-300 mb-2 w-60'>{text}</button>
+                ))
+            }
+              
         </div>
     </div>
   )

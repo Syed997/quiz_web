@@ -1,3 +1,4 @@
+import { useState } from "react";
 import QuizView from "./components/QuizView";
 import ScoreView from "./components/ScoreView";
 
@@ -44,10 +45,22 @@ function App() {
       ],
     },
   ];
+  const [mark, setMark] = useState(0);
+  const [currentQuestion, setcurrentQuestion] = useState(0);
+  const [quizOver, setQuizOver] = useState(false);
+  const handleBtnClicked = (isCorrect) => {
+    currentQuestion === questions.length-1 ? setQuizOver(true) : setcurrentQuestion(currentQuestion + 1);
+    isCorrect && (setMark(mark + 1));
+  }
+  const handleResetBtn = () =>{
+    setMark(0);
+    setQuizOver(false);
+    setcurrentQuestion(0);
+  }
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <ScoreView/>
-      {/* <QuizView/> */}
+      {quizOver ? <ScoreView mark={mark} handleResetBtn={handleResetBtn} /> : <QuizView questions={questions} currentQuestion={currentQuestion} handleBtnClicked={handleBtnClicked} />}
+      
     </div>
   );
 }
