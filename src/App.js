@@ -1,7 +1,7 @@
 import { useState } from "react";
 import QuizView from "./components/QuizView";
 import ScoreView from "./components/ScoreView";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate,  } from "react-router-dom";
 import Start from "./components/Start";
 
 function App() {
@@ -47,23 +47,28 @@ function App() {
       ],
     },
   ];
+  const history = useNavigate() ;
   const [mark, setMark] = useState(0);
   const [currentQuestion, setcurrentQuestion] = useState(0);
   const [quizOver, setQuizOver] = useState(false);
   const handleBtnClicked = (isCorrect) => {
     currentQuestion === questions.length-1 ? setQuizOver(true) : setcurrentQuestion(currentQuestion + 1);
     isCorrect && (setMark(mark + 1));
+    quizOver && (history('/score'))
   }
   const handleResetBtn = () =>{
     setMark(0);
     setQuizOver(false);
     setcurrentQuestion(0);
+    history('/home');
   }
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <Routes>
         <Route path="/" element={<Start/>} />
-        {quizOver ? <ScoreView mark={mark} handleResetBtn={handleResetBtn} /> : <Route path="/quiz" element={<QuizView questions={questions} currentQuestion={currentQuestion} handleBtnClicked={handleBtnClicked} />} /> }
+        <Route path="/home" element={<Start/>} />
+        <Route path="/score" element={<ScoreView mark={mark} handleResetBtn={handleResetBtn} />} />
+        <Route path="/quiz" element={<QuizView questions={questions} currentQuestion={currentQuestion} handleBtnClicked={handleBtnClicked} />} />
       </Routes>
       
       
