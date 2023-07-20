@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import QuizView from "./components/QuizView";
 import ScoreView from "./components/ScoreView";
 import { Route, Routes, useNavigate,  } from "react-router-dom";
@@ -51,10 +51,12 @@ function App() {
   const [mark, setMark] = useState(0);
   const [currentQuestion, setcurrentQuestion] = useState(0);
   const [quizOver, setQuizOver] = useState(false);
+  useEffect( ()=>{
+    quizOver && (history('/score'));
+  }, [quizOver, history]);
   const handleBtnClicked = (isCorrect) => {
     currentQuestion === questions.length-1 ? setQuizOver(true) : setcurrentQuestion(currentQuestion + 1);
     isCorrect && (setMark(mark + 1));
-    quizOver && (history('/score'))
   }
   const handleResetBtn = () =>{
     setMark(0);

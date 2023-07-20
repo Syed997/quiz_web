@@ -2,7 +2,7 @@ import React from 'react'
 
 function QuizView({ questions, currentQuestion, handleBtnClicked }) {
   return (
-      <div className='w-full h-full sm:w-2/3 sm:h-2/3 flex flex-col justify-center items-center bg-orange-300 rounded-lg py-10 pr-6 '>
+      <div className='w-full h-full sm:w-2/3 sm:h-2/3 flex flex-col justify-center items-center bg-orange-300 shadow-lg rounded-lg py-10 pr-6 '>
         <div className=''>
               <div className='font-bold'>
                 <span>Question {currentQuestion +1}/{questions.length}</span>
