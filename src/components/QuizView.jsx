@@ -17,7 +17,7 @@ function QuizView({ questions, currentQuestion, handleBtnClicked }) {
         <div className='flex flex-col items-center justify-center py-2'>
             {
                 questions[currentQuestion].answers.map(({text, isCorrect})=>(
-                    <button onClick={() => handleBtnClicked(isCorrect)} key={text} className='border-2 py-2 px-8 rounded-md bg-slate-300 mb-2 w-60'>{text}</button>
+                  <button onClick={() => handleBtnClicked(isCorrect)} key={text} className='border-2 py-2 px-8 rounded-md bg-slate-300 mb-2 w-60 hover:scale-110 duration-500 hover:bg-green-800'>{text}</button>
                 ))
             }
               
