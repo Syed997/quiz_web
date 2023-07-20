@@ -1,6 +1,8 @@
 import { useState } from "react";
 import QuizView from "./components/QuizView";
 import ScoreView from "./components/ScoreView";
+import { Route, Routes } from "react-router-dom";
+import Start from "./components/Start";
 
 function App() {
   const questions = [
@@ -59,7 +61,11 @@ function App() {
   }
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      {quizOver ? <ScoreView mark={mark} handleResetBtn={handleResetBtn} /> : <QuizView questions={questions} currentQuestion={currentQuestion} handleBtnClicked={handleBtnClicked} />}
+      <Routes>
+        <Route path="/" element={<Start/>} />
+        {quizOver ? <ScoreView mark={mark} handleResetBtn={handleResetBtn} /> : <Route path="/quiz" element={<QuizView questions={questions} currentQuestion={currentQuestion} handleBtnClicked={handleBtnClicked} />} /> }
+      </Routes>
+      
       
     </div>
   );
